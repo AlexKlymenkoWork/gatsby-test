@@ -1,10 +1,11 @@
 import React from 'react'
 import Layout from '../components/layout'
-
+import Head from '../components/head'
 
 function info() {
     return (
         <Layout >
+            <Head title="Info" />
             <div>
                 <br />
                 <hr />
