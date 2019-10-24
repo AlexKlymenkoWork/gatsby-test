@@ -1,6 +1,6 @@
 // Initialize dotenv
 require('dotenv').config({
-  path: `.env.${process.env.NODE_ENV}`, // or '.env'
+  path: `.env`, // or '.env.${process.env.NODE_ENV}'
 });
 
 // And then you can use the config in gatsby-config.js
