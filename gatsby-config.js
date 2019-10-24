@@ -1,20 +1,51 @@
+// Initialize dotenv
+require('dotenv').config({
+  path: `.env.${process.env.NODE_ENV}`, // or '.env'
+});
+
+// And then you can use the config in gatsby-config.js
+const config = require('gatsby-plugin-config');
+
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
+    title: 'Title for this web site',
+    author: 'Alex'
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
+    `gatsby-transformer-sharp`,
+    `gatsby-plugin-sharp`,
+    `gatsby-plugin-sass`,
+    {
+      resolve: 'gatsby-source-contentful',
+      options: {
+        spaceId: process.env.CONTENTFUL_SPACE_ID,
+        accessToken: process.env.CONTENTFUL_ACCESS_TOKEN
+      }
+    },
+    {
+      resolve: `gatsby-transformer-remark`,
+      options: {
+        plugins: [
+          `gatsby-remark-relative-images`,
+          {
+            resolve: 'gatsby-remark-images',
+            options: {
+              maxWidth: 750,
+              linkImagesToOriginal: false,
+
+            }
+          }
+        ]
+      }
+    },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        name: `images`,
-        path: `${__dirname}/src/images`,
+        name: `src`,
+        path: `${__dirname}/src/`,
       },
     },
-    `gatsby-transformer-sharp`,
-    `gatsby-plugin-sharp`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
@@ -31,4 +62,5 @@ module.exports = {
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
   ],
+
 }
